@@ -1,1 +1,34 @@
-[]
+[
+  {
+    "slug": "posts/2025-09-13-Next-js-blog",
+    "title": "Hello World",
+    "description": "第一篇 Velite 測試文章",
+    "date": "2025-09-13T00:00:00.000Z",
+    "published": true,
+    "tags": [
+      "nextjs",
+      "velite"
+    ],
+    "body": "const{Fragment:n,jsx:e,jsxs:t}=arguments[0];function _createMdxContent(r){const c={h1:\"h1\",p:\"p\",...r.components};return t(n,{children:[e(c.h1,{children:\"我的第一篇測試\"}),\"\\n\",e(c.p,{children:\"這裡是文章內容，恭喜成功！\"})]})}return{default:function(n={}){const{wrapper:t}=n.components||{};return t?e(t,{...n,children:e(_createMdxContent,{...n})}):_createMdxContent(n)}};",
+    "permalink": "/blog/posts/2025-09-13-Next-js-blog",
+    "readingTime": 1
+  },
+  {
+    "slug": "posts/2025-09-20-Next-js-blog",
+    "title": "建立 Next.js 15 + Velite 部落格的心得",
+    "description": "記錄使用 Next.js 15 和 Velite 建立現代化部落格的完整過程，包含遇到的問題和解決方案",
+    "date": "2025-09-20T00:00:00.000Z",
+    "published": true,
+    "tags": [
+      "nextjs",
+      "velite",
+      "typescript",
+      "blog",
+      "web-development"
+    ],
+    "category": "技術筆記",
+    "body": "const{Fragment:n,jsx:e,jsxs:r}=arguments[0];function _createMdxContent(t){const l={h1:\"h1\",h2:\"h2\",h3:\"h3\",li:\"li\",p:\"p\",strong:\"strong\",ul:\"ul\",...t.components};return r(n,{children:[e(l.h1,{children:\"建立 Next.js 15 + Velite 部落格的心得\"}),\"\\n\",e(l.p,{children:\"今天（2025年9月20日）終於完成了用 Next.js 15 和 Velite 建立部落格的基礎設定，想記錄一下整個過程中學到的東西。\"}),\"\\n\",e(l.h2,{children:\"為什麼選擇這個技術組合？\"}),\"\\n\",e(l.h3,{children:\"Next.js 15 的優勢\"}),\"\\n\",r(l.ul,{children:[\"\\n\",r(l.li,{children:[e(l.strong,{children:\"App Router\"}),\"：新的檔案系統路由更直觀\"]}),\"\\n\",r(l.li,{children:[e(l.strong,{children:\"Server Components\"}),\"：更好的效能和 SEO\"]}),\"\\n\",r(l.li,{children:[e(l.strong,{children:\"內建優化\"}),\"：圖片、字體、腳本自動優化\"]}),\"\\n\",r(l.li,{children:[e(l.strong,{children:\"TypeScript 整合\"}),\"：開發體驗極佳\"]}),\"\\n\"]}),\"\\n\",e(l.h3,{children:\"Velite vs Contentlayer\"}),\"\\n\",e(l.p,{children:\"原本考慮用 Contentlayer（看了很多 2022 年的教學），但後來發現：\"}),\"\\n\",r(l.ul,{children:[\"\\n\",e(l.li,{children:\"Contentlayer 已經不太維護了\"}),\"\\n\",e(l.li,{children:\"Velite 是更現代的替代方案\"}),\"\\n\",e(l.li,{children:\"支援 MDX、型別安全、熱更新\"}),\"\\n\",e(l.li,{children:\"配置更簡潔，不需要複雜的適配器\"}),\"\\n\"]}),\"\\n\",e(l.h2,{children:\"實際遇到的問題\"}),\"\\n\",e(l.h3,{children:\"1. YAML Frontmatter 格式問題\"})]})}return{default:function(n={}){const{wrapper:r}=n.components||{};return r?e(r,{...n,children:e(_createMdxContent,{...n})}):_createMdxContent(n)}};",
+    "permalink": "/blog/posts/2025-09-20-Next-js-blog",
+    "readingTime": 2
+  }
+]

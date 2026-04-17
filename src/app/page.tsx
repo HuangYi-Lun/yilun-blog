@@ -1,103 +1,139 @@
-import Image from "next/image";
+import { posts } from '#site/content'
+import Link from 'next/link'
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  // 取得最新的已發布文章
+  const latestPosts = posts
+    .filter(post => post.published)
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .slice(0, 5) // 顯示最新 5 篇
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+      <div className="container mx-auto px-4 py-16">
+        {/* 頭部區域 */}
+        <header className="text-center mb-16">
+          <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6">
+            歡迎來到怡綸的部落格
+          </h1>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            分享 Next.js、Velite 和前端開發的學習心得
+          </p>
+        </header>
+
+        {/* 最新文章區域 */}
+        <main>
+          <section className="mb-12">
+            <div className="flex items-center justify-between mb-8">
+              <h2 className="text-3xl font-bold text-gray-900">最新文章</h2>
+              <Link 
+                href="/blog"
+                className="text-blue-600 hover:text-blue-800 font-medium"
+              >
+                查看全部 →
+              </Link>
+            </div>
+
+            {/* 文章列表 */}
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {latestPosts.map((post) => (
+                <article 
+                  key={post.slug} 
+                  className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow p-6"
+                >
+                  <header className="mb-4">
+                    <Link href={post.permalink}>
+                      <h3 className="text-xl font-bold text-gray-900 hover:text-blue-600 transition-colors">
+                        {post.title}
+                      </h3>
+                    </Link>
+                    <div className="text-sm text-gray-500 mt-2">
+                      <time dateTime={post.date}>
+                        {new Date(post.date).toLocaleDateString('zh-TW', {
+                          year: 'numeric',
+                          month: 'long',
+                          day: 'numeric'
+                        })}
+                      </time>
+                      <span className="mx-2">•</span>
+                      <span>約 {post.readingTime} 分鐘閱讀</span>
+                    </div>
+                  </header>
+
+                  {post.description && (
+                    <p className="text-gray-600 mb-4 line-clamp-3">
+                      {post.description}
+                    </p>
+                  )}
+
+                  {post.tags && post.tags.length > 0 && (
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {post.tags.slice(0, 3).map(tag => (
+                        <span 
+                          key={tag}
+                          className="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs"
+                        >
+                          #{tag}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+
+                  <Link 
+                    href={post.permalink}
+                    className="text-blue-600 hover:text-blue-800 font-medium text-sm"
+                  >
+                    閱讀更多 →
+                  </Link>
+                </article>
+              ))}
+            </div>
+
+            {/* 如果沒有文章 */}
+            {latestPosts.length === 0 && (
+              <div className="text-center py-12">
+                <p className="text-gray-500 mb-4">還沒有文章，敬請期待！</p>
+                <Link 
+                  href="/test-content"
+                  className="text-blue-600 hover:text-blue-800"
+                >
+                  查看內容測試頁面
+                </Link>
+              </div>
+            )}
+          </section>
+
+          {/* 關於區域 */}
+          <section className="text-center bg-white rounded-lg shadow-md p-8">
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">關於本站</h2>
+            <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
+              這是一個使用 Next.js 15、Velite 和 Tailwind CSS 建立的現代化部落格。
+              我會在這裡分享技術學習心得、專案經驗和開發筆記。
+            </p>
+            <div className="flex gap-4 justify-center">
+              <Link 
+                href="/blog"
+                className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
+              >
+                瀏覽文章
+              </Link>
+              <Link 
+                href="/about"
+                className="border border-gray-300 text-gray-700 px-6 py-3 rounded-lg hover:bg-gray-50 transition-colors"
+              >
+                了解更多
+              </Link>
+            </div>
+          </section>
+        </main>
+
+        {/* 頁尾 */}
+        <footer className="text-center mt-16 pt-8 border-t border-gray-200">
+          <p className="text-gray-500">
+            © 2025 我的部落格. 使用 Next.js + Velite 建立
+          </p>
+        </footer>
+      </div>
     </div>
-  );
+  )
 }

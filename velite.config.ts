@@ -4,8 +4,7 @@
 const posts = defineCollection({
   name: 'Post',
   pattern: 'posts/**/*.{md,mdx}',
-  schema: s
-    .object({
+  schema: s.object({
       slug: s.path(),                           // 自動生成路徑
       title: s.string().max(99),               // 文章標題
       description: s.string().max(999).optional(), // 文章描述
